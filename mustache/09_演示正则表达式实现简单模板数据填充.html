@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    
+    console.log('我爱尚硅谷，我也爱打篮球'.replace('我', '你'))
+    // result: '你爱尚硅谷，我也爱打篮球'
+    console.log('我爱尚硅谷，我也爱打篮球'.replace(/我/g, '你'))  // regexp/正则表达式
+    // result: '你爱尚硅谷，你也爱打篮球'
+    console.log('我爱尚硅谷，我也爱打篮球'.replace(/我/g, function(a, b, c) {
+      console.log(a, b, c);
+      return '他';
+    }))
+
+    var templateStr = '<h1>我买了一个{{thing}}，好{{mood}}</h1>';
+    var data = {
+      thing: '华为手机',
+      mood: '开心'
+    };
+
+    // 最简单的模板引擎的实现机理，利用的是正则表达式中的replace的方法
+    // replace()的第二个参数可以是一个函数，这个函数提供捕获的东西的参数，就是$1
+    // 再结合data对象，即可进行只能的替换
+    function render(templateStr, data) {
+      return templateStr.replace(/\{\{(\w+)\}\}/g, function(findStr, $1, pos, original) {
+        return data[$1];
+      })
+    }
+
+    console.log(render(templateStr, data)) 
+
+
+  </script>
+</body>
+</html>

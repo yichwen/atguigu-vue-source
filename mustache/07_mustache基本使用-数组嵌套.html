@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="container"></div>
+  <script src="jslib/mustache.js"></script>
+  <script>
+    // console.log(Mustache)
+    var templateStr = `
+      <ul>
+        {{#arr}}
+        <li>
+          {{name}}的爱好：
+          <ol>
+            {{#hobbies}}
+            <li>{{.}}</li>
+            {{/hobbies}}
+          </ol>
+        </li>
+        {{/arr}}
+      </ul>
+    `;
+
+    var arr = [
+      { name: 'Jason', age: 21, hobbies: ['swimming', 'badminton'] },
+      { name: 'Jenny', age: 18, hobbies: ['programming', 'writing', 'reading'] },
+      { name: 'Jay', age: 25, hobbies: ['snooker'] }
+    ];
+
+    var domStr = Mustache.render(templateStr, {arr});
+    var container = document.getElementById('container');
+    container.innerHTML = domStr;
+  </script>
+</body>
+</html>
