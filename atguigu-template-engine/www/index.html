@@ -8,12 +8,13 @@
 </head>
 <body>
   <h1>Hi, I am index.html</h1>
+  <div id="container"></div>
   <script src="/xuni/bundle.js"></script>
   <script>
     var templateStr = `
       <ul>
-        {{#arr}}
-        <li>
+        {{#students}}
+        <li class="list">
           {{name}}的爱好：
           <ol>
             {{#hobbies}}
@@ -24,8 +25,21 @@
         {{/arr}}
       </ul>
     `;
-    var data = {};
-    SGG_TemplateEngine.render(templateStr, data)
+    var students = [
+      { name: 'Jason', age: 21, hobbies: ['swimming', 'badminton'] },
+      { name: 'Jenny', age: 18, hobbies: ['programming', 'writing', 'reading'] },
+      { name: 'Jay', age: 25, hobbies: ['snooker'] }
+    ];
+    var data = { students };
+
+    // var templateStr = '我爱{{somebody}}，{{somebody}}也爱我，我考{{a.b.c}}分';
+    // var data = { somebody: '尚硅谷', a: { b: { c: 100 } } };
+    var domStr = SGG_TemplateEngine.render(templateStr, data);
+    console.log(domStr);
+    const container = document.getElementById('container');
+    if (container) {
+      container.innerHTML = domStr;
+    }
   </script>
 </body>
 </html>
